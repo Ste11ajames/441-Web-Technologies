@@ -1,2 +1,3 @@
 # 411-Web-Technologies
  
+For this homework I really just wanted to get familiar with the basics again as I have not coded for a but and needed a refresher on mant things. For the next assingments I will work on more of the design elements but for now I just needed things to be simple for my own understanding. Also please forgive my terrible spelling, it has never been my strong suit and the lack of autocorrect is not helpful haha. 
