@@ -20,3 +20,4 @@ console.log("3. Hayao Miyazaki - Introduced the world to Japanese animation and 
 
 
 var name = prompt('what is your favorite sweet treat?')
+// My Prompt! this was so fun and cool! Didn't know it was that easy to create a feature like this. 
