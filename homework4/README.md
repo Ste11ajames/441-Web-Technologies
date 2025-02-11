@@ -1,0 +1,1 @@
+Once again I had a bit of a difficult time with this assignment. shocker! I couldnt get the images to change eveytime it took you to a new level of the story. When I plugged in the assingment to chatgpt it was a pretty broing story but it did sorta work. It was helpful to ask ChatGPT for help on connecting the the story options as I also stuggled with that. 

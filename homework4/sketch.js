@@ -8,7 +8,7 @@ function makeChoice() {
   switch (currentScene) {
     case 1: // Starting scene
       if (userChoice === "left") {
-        result = "You go to the left and find a dive bar. So you eat? .";
+        result = "You go to the left and find a dive bar. Do you eat or wait?";
         currentScene = 2;
         extraStyle = "forest"; 
       } else if (userChoice === "right") {
@@ -36,9 +36,9 @@ function makeChoice() {
   }
 
   document.getElementById("storyText").innerText = result;
-  updateStyle(extraStyle); // Apply extra style if needed
-  document.getElementById("resultText").innerText = ""; // Clear previous results
-  document.getElementById("userChoice").value = ""; // Clear input field
+  updateStyle(extraStyle); 
+  document.getElementById("resultText").innerText = ""; 
+  document.getElementById("userChoice").value = ""; 
 
   if (currentScene > 3) {
     document.getElementById("restartButton").style.display = "block";
