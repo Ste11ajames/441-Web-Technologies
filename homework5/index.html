@@ -1,6 +1,11 @@
 <html>
     <head>
         <title> Match By Memory</title>
+        <style>
+            body {background-color: rgb(171, 215, 197)}
+            h1 {color: rgb(26, 5, 45)}
+            h2 {color: rgb(209, 46, 52)}
+          </style>
         <script src="sketch.js"> </script>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
     </link>
@@ -8,7 +13,23 @@
 
     <body onload="printBlanks();"> 
         <h1>Match By Memory</h1>
+       
+        <div class="divTable">
+            <div class="divTableBody">
+                <div class="divTableRow">
+                    <div class="divTableCell"><img src="" id="image1" width="250" height="200" onclick="flipImage(0);"></div>
+                    <div class="divTableCell"><img src="" id="image2" width="250" height="200" onclick="flipImage(1);"></div>
+                    <div class="divTableCell"><img src="" id="image5" width="250" height="200" onclick="flipImage(4);"></div>
+                    <div class="divTableCell"><img src="" id="image6" width="250" height="200" onclick="flipImage(5);"></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell"><img src="" id="image3" width="250" height="200" onclick="flipImage(2);"></div>
+                    <div class="divTableCell"><img src="" id="image4" width="250" height="200" onclick="flipImage(3);"></div>
+                    <div class="divTableCell"><img src="" id="image7" width="250" height="200" onclick="flipImage(6);"></div>
+                    <div class="divTableCell"><img src="" id="image8" width="250" height="200" onclick="flipImage(7);"></div>
+                </div>
+            </div>
+        </div>
 
-        
     </body>
 </html>
