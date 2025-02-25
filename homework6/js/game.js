@@ -1,31 +1,54 @@
 var attempts = 0;
+var flippedCards = []; // Stores flipped cards for matching
 
 function flipImage(number) {
-    if (actualImages.length === 8) { 
-        document.getElementById(imageTags[number]).src = actualImages[number];
+    if (actualImages.length !== 8) {
+        console.error("actualImages not initialized correctly.");
+        return;
+    }
 
-        // Increment attempts
-        attempts++;
+    let clickedImage = document.getElementById(imageTags[number]);
+
+    // Prevent flipping already flipped cards
+    if (flippedCards.includes(number)) return;
+
+    clickedImage.src = actualImages[number];
+    flippedCards.push(number);
+
+    // If two cards are flipped, check for a match
+    if (flippedCards.length === 2) {
+        attempts++; // Increment attempts after every two flips
         document.getElementById("attemptCount").innerText = attempts;
 
-        // Store updated attempts in localStorage
+        // Store attempts in localStorage
         let playerData = JSON.parse(localStorage.getItem("playerData"));
         playerData.attempts = attempts;
         localStorage.setItem("playerData", JSON.stringify(playerData));
 
-        // Check if the game is finished
-        if (checkGameCompletion()) {
-            window.location.href = "results.html";
-        }
+        setTimeout(checkMatch, 1000);
     }
 }
 
-function checkGameCompletion() {
-    // Check if all images are revealed (Game completion condition)
-    for (let i = 0; i < imageTags.length; i++) {
-        if (document.getElementById(imageTags[i]).src.includes("star.jpg")) {
-            return false; // Some images are still hidden
-        }
+function checkMatch() {
+    let firstCard = flippedCards[0];
+    let secondCard = flippedCards[1];
+
+    if (actualImages[firstCard] === actualImages[secondCard]) {
+        // Cards match, keep them flipped
+    } else {
+        // Cards don't match, reset them
+        setTimeout(() => {
+            document.getElementById(imageTags[firstCard]).src = blankImagePath;
+            document.getElementById(imageTags[secondCard]).src = blankImagePath;
+        }, 1000);
     }
-    return true;
+
+    flippedCards = []; // Reset flipped cards
+
+    // Check if the game is finished
+    if (document.querySelectorAll('img[src="' + blankImagePath + '"]').length === 0) {
+        setTimeout(() => {
+            window.location.href = "results.html"; // Redirect to results page
+        }, 1000);
+    }
 }
