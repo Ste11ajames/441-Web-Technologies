@@ -1,5 +1,11 @@
 var attempts = 0;
-var flippedCards = []; // Stores flipped cards for matching
+var flippedCards = []; 
+var flippedImages = [];
+var matchedPairs = 0;  
+var imageTags = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8"];
+var blankImagePath = "images/star.jpg"; 
+
+
 
 function flipImage(number) {
     if (actualImages.length !== 8) {
@@ -9,19 +15,16 @@ function flipImage(number) {
 
     let clickedImage = document.getElementById(imageTags[number]);
 
-    // Prevent flipping already flipped cards
     if (flippedCards.includes(number)) return;
 
     clickedImage.src = actualImages[number];
     flippedCards.push(number);
 
-    // If two cards are flipped, check for a match
     if (flippedCards.length === 2) {
-        attempts++; // Increment attempts after every two flips
-        document.getElementById("attemptCount").innerText = attempts;
+        attempts++;
+        document.getElementById("attemptCount").innerText = "Attempts: " + attempts;
 
-        // Store attempts in localStorage
-        let playerData = JSON.parse(localStorage.getItem("playerData"));
+        let playerData = JSON.parse(localStorage.getItem("playerData")) || {};
         playerData.attempts = attempts;
         localStorage.setItem("playerData", JSON.stringify(playerData));
 
@@ -29,26 +32,33 @@ function flipImage(number) {
     }
 }
 
+
+
 function checkMatch() {
-    let firstCard = flippedCards[0];
-    let secondCard = flippedCards[1];
+    let firstCardIndex = flippedCards[0];
+    let secondCardIndex = flippedCards[1];
 
-    if (actualImages[firstCard] === actualImages[secondCard]) {
-        // Cards match, keep them flipped
+    let firstImage = flippedImages[0];
+    let secondImage = flippedImages[1];
+
+    if (firstImage === secondImage) {
+        matchedPairs++;
+
+        
+        if (matchedPairs === 4) { 
+            setTimeout(() => {
+                window.location.href = "results.html"; 
+            }, 1000);
+        }
     } else {
-        // Cards don't match, reset them
+     
         setTimeout(() => {
-            document.getElementById(imageTags[firstCard]).src = blankImagePath;
-            document.getElementById(imageTags[secondCard]).src = blankImagePath;
+            document.getElementById(imageTags[firstCardIndex]).src = blankImagePath;
+            document.getElementById(imageTags[secondCardIndex]).src = blankImagePath;
         }, 1000);
     }
 
-    flippedCards = []; // Reset flipped cards
-
-    // Check if the game is finished
-    if (document.querySelectorAll('img[src="' + blankImagePath + '"]').length === 0) {
-        setTimeout(() => {
-            window.location.href = "results.html"; // Redirect to results page
-        }, 1000);
-    }
+    
+    flippedCards = [];
+    flippedImages = [];
 }

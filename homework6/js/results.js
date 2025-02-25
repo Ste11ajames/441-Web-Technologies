@@ -1,3 +1,4 @@
+
 function displayResults() {
     let playerData = JSON.parse(localStorage.getItem("playerData"));
 
@@ -7,10 +8,8 @@ function displayResults() {
 }
 
 function restartGame() {
-    // Clear previous attempts and restart
     let playerData = JSON.parse(localStorage.getItem("playerData"));
-    playerData.attempts = 0;
+    playerData.attempts = 0; 
     localStorage.setItem("playerData", JSON.stringify(playerData));
-
-    window.location.href = "index.html"; // Go back to the intro page
+    window.location.href = "index.html"; 
 }
