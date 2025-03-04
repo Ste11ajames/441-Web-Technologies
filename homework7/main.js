@@ -18,7 +18,7 @@ function setup() {
   button.position(20, 20);
   button.mousePressed(showRandomArtwork);
 
-  // Create artwork objects
+ 
   artworks.push(new Artwork("Rosa Parks", img1, "December 1 Rosa Parks gets arrested for not moving seats for a white man ", "Police",  1955));
   artworks.push(new Artwork("Ruby Bridges", img2, "Nov 14 Ruby Bridges is the first African American child to attend formerly whites-only ", "Norman Rockwell", 1960));
   artworks.push(new Artwork("Tank Man", img3, "In Beijing On June 5 and unknown man makes an anti-war stance", "Jeff Widener", 1989));
