@@ -10,7 +10,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(600, 400);
+  createCanvas(600, 600);
 
   // Create obstacles from JSON
   for (let item of Object.values(objectData)) {
@@ -38,14 +38,14 @@ function draw() {
     col.display();
   }
 
-  // Draw and update player
+ 
   player.update();
   player.display();
 
-  // Draw score
+  // score
   fill(0);
   textSize(20);
-  text("Score: " + score, 10, 30);
+  text("Your Score: " + score, 10, 30);
 }
 
 // Obstacle class
