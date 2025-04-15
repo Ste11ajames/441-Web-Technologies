@@ -49,6 +49,7 @@ function preload ()
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/wabbit.png');
     this.load.image('bomb', 'assets/shinyball.png');
+    this.load.image('master', 'assets/master.png');
     this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 }
 
@@ -61,7 +62,7 @@ function create ()
     platforms.create(600, 400, 'ground');
     platforms.create(50, 250, 'ground');
     platforms.create(750, 220, 'ground');
-    platforms.create(400, 350, 'ground').setScale(0.5, 1).refreshBody(); // NEW SMALL PLATFORM
+    platforms.create(40, 450, 'ground').setScale(0.5, 1).refreshBody(); // NEW SMALL PLATFORM
 
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
