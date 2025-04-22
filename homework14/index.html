@@ -1,17 +1,119 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>My first three.js app</title>
-        <style>
-            body { margin: 0; }
-            canvas { display: block; }
-        </style>
-    </head>
-    <body>
-        <script src="js/three.js"></script>
-        <script>
-            // Our Javascript will go here.
-        </script>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stella's Homework 14</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+
+
+  <script src="js/three.min.js"></script>
+  <script src="js/OBJLoader.js"></script>
+  <script src="js/TrackballControls.js"></script>
+
+  <script>
+    let scene = getScene();
+    let camera = getCamera();
+    let light = getLight(scene);
+    let renderer = getRenderer();
+    let controls = getControls(camera, renderer);
+
+    let cube, cube2, modelObject;
+
+    // first box
+    function createBox() {
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({ color: 0x324ca8 });
+      cube = new THREE.Mesh(geometry, material);
+      cube.position.set(50, 0, 0);
+      cube.scale.set(15, 15, 15);
+      scene.add(cube);
+
+      createBox2();
+      animate();
+    }
+
+    // second box 
+    function createBox2() {
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({ color: 0x1234ee });
+      cube2 = new THREE.Mesh(geometry, material);
+      cube2.position.set(2, 0, 0);
+      cube2.scale.set(0.5, 0.5, 0.5);
+      cube.add(cube2);
+    }
+
+    // Load model Anteater
+    function loadModel() {
+      const loader = new THREE.OBJLoader();
+      loader.load('model/NUMBAT.obj', function (object) {
+        object.scale.set(10, 10, 10);
+        object.position.set(0, -30, 0);
+        modelObject = object;
+        scene.add(modelObject);
+      });
+    }
+
+    
+    function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      cube2.rotation.x += 0.05;
+      cube2.rotation.y += 0.05;
+
+      if (modelObject) {
+        modelObject.rotation.y += 0.01;
+      }
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    // Utility setup functions
+    function getScene() {
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xaaaaaa);
+      return scene;
+    }
+
+    function getCamera() {
+      const aspectRatio = window.innerWidth / window.innerHeight;
+      const camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
+      camera.position.set(0, 90, -10);
+      return camera;
+    }
+
+    function getLight(scene) {
+      const light = new THREE.PointLight(0xffffff, 1, 0);
+      light.position.set(20, 50, 20);
+      scene.add(light);
+      scene.add(new THREE.AmbientLight(0x111111));
+      return light;
+    }
+
+    function getRenderer() {
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+      return renderer;
+    }
+
+    function getControls(camera, renderer) {
+      const controls = new THREE.TrackballControls(camera, renderer.domElement);
+      controls.zoomSpeed = 0.4;
+      controls.panSpeed = 0.4;
+      return controls;
+    }
+
+    
+    createBox();
+    loadModel();
+  </script>
+</body>
 </html>
+
